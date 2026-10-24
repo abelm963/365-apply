@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Apply | 365 Financial Services</title>
-<meta name="description" content="Short-term payday loans for salaried people. Apply online in about 5 minutes and upload your documents with your application.">
+<meta name="description" content="Short-term payday loans for salaried people. Apply in about 2 minutes: your name, cellphone, the amount, and photos of your documents.">
 <!-- Before publishing: set SUPABASE_URL and SUPABASE_KEY below (Supabase → Project settings → API: Project URL and the publishable/anon key).
      The key can only ADD applications and documents; it cannot read anything back. -->
 <style>
@@ -57,13 +57,14 @@ footer a{color:inherit}
 <p class="brand">365 FINANCIAL SERVICES</p>
 <h1>Apply for a payday loan</h1>
 <p class="lead">Quick, short-term loans for salaried people. One repayment on your next payday.</p>
-<ul class="facts"><li>About 5 minutes</li><li>Upload documents here</li><li>No account needed</li></ul>
+<ul class="facts"><li>About 2 minutes</li><li>4 questions + your documents</li><li>No account needed</li></ul>
 <a class="btn main" href="#apply">Start my application</a>
 
 <h2>How it works</h2>
 <div class="card"><ol class="steps">
-<li>Fill in the form below and upload your ID, latest payslip and 3 months' bank statements.</li>
-<li>We check them and confirm the amount and repayment date with you on WhatsApp.</li>
+<li>Give your name, cellphone and the amount, and upload your ID, latest payslip and 3 months' bank statements.</li>
+<li>Send us the WhatsApp message the page gives you, so we know the number is yours.</li>
+<li>We check your documents and confirm the amount and repayment date with you on WhatsApp.</li>
 <li>The money is paid into your bank account.</li>
 <li>Repay the full amount on your payday, using the reference we give you.</li>
 </ol></div>
@@ -79,23 +80,12 @@ footer a{color:inherit}
 
 <h2 id="apply">Your application</h2>
 <form id="af" class="card" novalidate>
-<h3>About you</h3>
-<label class="f">Full name<input id="name" autocomplete="name" required maxlength="120"></label>
+<label class="f">Full name <small>As on your ID</small><input id="name" autocomplete="name" required maxlength="120"></label>
 <label class="f">Cellphone (WhatsApp)<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="082 123 4567"></label>
-<label class="f">Email <small>Optional</small><input id="email" type="email" autocomplete="email" maxlength="200"></label>
-<label class="f">SA ID number<input id="idn" inputmode="numeric" maxlength="13" required></label>
-<div class="err" id="idn_err" hidden></div>
-<h3>Work and pay</h3>
-<label class="f">Employer<input id="employer" autocomplete="organization" required maxlength="120"></label>
-<label class="f">Payday <small>The day your salary is paid, e.g. 25th or last Friday</small><input id="payday" required maxlength="40"></label>
-<label class="f">Monthly take-home pay (R)<input id="net" type="number" inputmode="numeric" min="0" step="1" required></label>
-<h3>Your loan</h3>
 <label class="f">Amount you want to borrow (R)<input id="amount" type="number" inputmode="numeric" min="100" step="50" required></label>
 <div class="small" id="quote" style="color:var(--muted);font-size:.92rem;margin-top:4px"></div>
-<label class="f">Date you will repay <small>Your next payday</small><input id="repay" type="date" required></label>
-<label class="f">How did you hear about us?<select id="source"><option value="">Choose</option><option>Facebook</option><option>WhatsApp</option><option>A friend or family member</option><option>Google</option><option>Flyer or poster</option><option>Other</option></select></label>
-<h3>Documents</h3>
-<p style="margin:0;color:var(--muted);font-size:.95rem">Clear photos or PDFs, up to 10 MB each.</p>
+<h3>Your documents</h3>
+<p style="margin:0;color:var(--muted);font-size:.95rem">Clear photos or PDFs, up to 10 MB each. We read your ID number, employer, payday and pay from these, so you don't have to type them.</p>
 <label class="f">ID (both sides of a card ID)<input id="f_id" type="file" accept="image/*,application/pdf" multiple required></label>
 <label class="f">Latest payslip<input id="f_payslip" type="file" accept="image/*,application/pdf" multiple required></label>
 <label class="f">Bank statements for the last 3 months<input id="f_bank" type="file" accept="image/*,application/pdf" multiple required></label>
@@ -124,32 +114,20 @@ footer a{color:inherit}
 const SUPABASE_URL = 'https://zkbxerbrvyghxhnhtttr.supabase.co', SUPABASE_KEY = 'sb_publishable_QrYuyabE9Hcz-f_8oVWZLA_610EGKi2';
 const $ = id => document.getElementById(id), v = id => $(id).value.trim();
 const MAX = 10 * 1024 * 1024, TYPES = /^(application\/pdf|image\/(jpeg|png|webp))$/;
-function checkID(id) {
-  if (!/^\d{13}$/.test(id)) return 'Your ID number must be 13 digits.';
-  let s = 0; for (let i = 0; i < 13; i++) { let d = +id[i]; if (i % 2) { d *= 2; if (d > 9) d -= 9; } s += d; }
-  if (s % 10) return 'Please check your ID number; it does not look right.';
-  const mm = +id.slice(2, 4), dd = +id.slice(4, 6); if (mm < 1 || mm > 12 || dd < 1 || dd > 31) return 'Please check your ID number; the date of birth part does not look right.';
-  return '';
-}
 const money = x => 'R' + x.toLocaleString('en-ZA', { minimumFractionDigits: x % 1 ? 2 : 0, maximumFractionDigits: 2 }).replace(/ /g, ',');
 $('amount').addEventListener('input', () => { const a = +v('amount'); $('quote').textContent = a > 0 ? `You would repay ${money(Math.round((a * 1.35 + 40) * 100) / 100)} on payday (35% interest + R40 admin fee).` : ''; });
-$('idn').addEventListener('blur', () => { const e = v('idn') ? checkID(v('idn').replace(/\s/g, '')) : ''; $('idn_err').textContent = e; $('idn_err').hidden = !e; });
 const say = (cls, html) => { $('msg').innerHTML = `<div class="note ${cls}">${html}</div>`; };
 const head = extra => ({ apikey: SUPABASE_KEY, ...(SUPABASE_KEY.startsWith('eyJ') ? { Authorization: 'Bearer ' + SUPABASE_KEY } : {}), ...extra });
+const confirmCode = id => id.replace(/-/g, '').slice(0, 6).toUpperCase(); // the desk shows the same code
 const uuid = () => crypto.randomUUID ? crypto.randomUUID() : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
 $('af').addEventListener('submit', async e => {
   e.preventDefault();
   if (v('website')) return; // filled in only by spam bots
-  const idn = v('idn').replace(/\s/g, ''), groups = [['id', $('f_id').files], ['payslip', $('f_payslip').files], ['bank', $('f_bank').files]];
+  const groups = [['id', $('f_id').files], ['payslip', $('f_payslip').files], ['bank', $('f_bank').files]];
   const problems = [];
   if (v('name').length < 2) problems.push('your full name');
   if (!/^[0-9 +()-]{9,20}$/.test(v('phone'))) problems.push('a cellphone number');
-  const ide = checkID(idn); if (ide) problems.push('a valid ID number');
-  if (!v('employer')) problems.push('your employer');
-  if (!v('payday')) problems.push('your payday');
-  if (!(+v('net') > 0)) problems.push('your take-home pay');
   if (!(+v('amount') >= 100)) problems.push('the amount you want to borrow');
-  if (!v('repay') || v('repay') <= new Date().toISOString().slice(0, 10)) problems.push('a repayment date in the future');
   for (const [k, fs] of groups) if (!fs.length) problems.push({ id: 'your ID', payslip: 'your payslip', bank: 'your bank statements' }[k]);
   const files = groups.flatMap(([k, fs]) => [...fs].map(f => ({ k, f })));
   if (files.length > 10) problems.push('no more than 10 files in total');
@@ -168,11 +146,11 @@ $('af').addEventListener('submit', async e => {
       paths.push({ path, kind: k, name: f.name.slice(0, 120), type: f.type });
     }
     say('', 'Sending your application…');
-    const row = { id, name: v('name'), phone: v('phone'), email: v('email') || null, id_number: idn, employer: v('employer'), payday: v('payday'), net_income: +v('net'), amount: +v('amount'), repay_date: v('repay'), source: v('source') || null, files: paths, consent: true };
+    const row = { id, name: v('name'), phone: v('phone'), amount: +v('amount'), files: paths, consent: true };
     const r = await fetch(`${SUPABASE_URL}/rest/v1/applications`, { method: 'POST', headers: head({ 'content-type': 'application/json', Prefer: 'return=minimal' }), body: JSON.stringify(row) });
     if (!r.ok) throw new Error('save ' + r.status);
-    const first = row.name.split(' ')[0].replace(/[<&]/g, ''), ph = row.phone.replace(/[<&]/g, '');
-    $('af').innerHTML = `<div class="note good"><b>Thank you, ${first}. Your application is in.</b><br>We will contact you on WhatsApp at ${ph} once we have checked your documents.</div><a class="btn wa" href="https://wa.me/27608602558" target="_blank" rel="noopener">Questions? WhatsApp us</a>`;
+    const first = row.name.split(' ')[0].replace(/[<&]/g, ''), code = confirmCode(id), wa = 'https://wa.me/27608602558?text=' + encodeURIComponent('365 confirm ' + code);
+    $('af').innerHTML = `<div class="note good"><b>Thank you, ${first}. Your application is in.</b><br>One last step: send us the WhatsApp message below from this phone, so we know the number is yours. We only start checking once it arrives.</div><a class="btn main" href="${wa}" target="_blank" rel="noopener">Send "365 confirm ${code}" on WhatsApp</a><p style="color:var(--muted);font-size:.92rem;margin:4px 0 0">If the button doesn't open WhatsApp, send <b>365 confirm ${code}</b> to 060 860 2558.</p>`;
     $('af').scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (err) {
     $('go').disabled = false;
