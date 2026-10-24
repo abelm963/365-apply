@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apply | 365 Financial Services</title>
+<meta name="description" content="Short-term payday loans for salaried people. Apply online in about 5 minutes and upload your documents with your application.">
+<!-- Before publishing: set SUPABASE_URL and SUPABASE_KEY below (Supabase → Project settings → API: Project URL and the publishable/anon key).
+     The key can only ADD applications and documents; it cannot read anything back. -->
+<style>
+:root{--ink:#14212e;--muted:#4f5f6f;--brand:#1f4e78;--brand-ink:#fff;--wa:#0b6e3a;--bg:#f4f7fa;--card:#fff;--line:#dbe3eb;--soft:#e8f0f7;--warn:#8a4b00;--warn-bg:#fff4e5;--bad:#a4161a;--bad-bg:#fdecec;--good:#0b6e3a;--good-bg:#e7f6ec}
+@media (prefers-color-scheme:dark){:root{--ink:#e7edf3;--muted:#a9b6c3;--brand:#6fa8dc;--brand-ink:#0d1620;--wa:#3ccf7a;--bg:#0f1720;--card:#16212c;--line:#283746;--soft:#1c2a37;--warn:#ffc078;--warn-bg:#2b2116;--bad:#ff8a8a;--bad-bg:#2c1717;--good:#3ccf7a;--good-bg:#142a1d}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);padding-bottom:84px}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 8px}
+.brand{font-weight:700;letter-spacing:.02em;color:var(--brand);font-size:.95rem;margin:0 0 14px}
+h1{font-size:1.75rem;line-height:1.2;margin:0 0 8px}
+h2{font-size:1.15rem;margin:30px 0 10px}
+h3{font-size:1rem;margin:18px 0 6px}
+.lead{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;width:100%;border-radius:12px;font-weight:700;font-size:1.05rem;text-decoration:none;padding:12px 18px;margin:8px 0;text-align:center;border:0;cursor:pointer;font-family:inherit}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.btn.main{background:var(--brand);color:var(--brand-ink)}
+.btn.main[disabled]{opacity:.6;cursor:wait}
+.btn.wa{background:transparent;color:var(--wa);border:2px solid var(--wa)}
+.facts{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px;padding:0;list-style:none}
+.facts li{background:var(--soft);border-radius:999px;padding:4px 12px;font-size:.9rem}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row.total{font-weight:700;font-size:1.08rem}
+.note{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:12px 14px;font-size:.95rem;margin:10px 0}
+.note.bad{background:var(--bad-bg);color:var(--bad)}
+.note.good{background:var(--good-bg);color:var(--good)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps li{counter-increment:s;position:relative;padding:4px 0 12px 44px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+label.f{display:block;margin:12px 0 0;font-weight:600;font-size:.95rem}
+label.f small{display:block;font-weight:400;color:var(--muted)}
+input,select{display:block;width:100%;margin-top:6px;min-height:48px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input[type=file]{padding:10px;background:var(--soft)}
+input:focus,select:focus{outline:2px solid var(--brand);outline-offset:1px}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:.95rem}
+.chk input{width:22px;height:22px;min-height:0;margin:2px 0 0;flex:0 0 auto}
+.err{color:var(--bad);font-size:.88rem;margin-top:4px}
+.hp{position:absolute;left:-9999px}
+details{border-bottom:1px solid var(--line);padding:10px 0}
+details:last-child{border:0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;color:var(--muted)}
+footer{color:var(--muted);font-size:.9rem;text-align:center;padding:24px 0 8px}
+footer a{color:inherit}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;z-index:5}
+.bar .btn{margin:0;min-height:48px;font-size:1rem}
+.bar .btn.wa{flex:0 0 auto;width:auto;padding:12px 16px}
+@media (min-width:760px){body{padding-bottom:0}.bar{display:none}}
+</style></head><body>
+<main class="wrap">
+<p class="brand">365 FINANCIAL SERVICES</p>
+<h1>Apply for a payday loan</h1>
+<p class="lead">Quick, short-term loans for salaried people. One repayment on your next payday.</p>
+<ul class="facts"><li>About 5 minutes</li><li>Upload documents here</li><li>No account needed</li></ul>
+<a class="btn main" href="#apply">Start my application</a>
+
+<h2>How it works</h2>
+<div class="card"><ol class="steps">
+<li>Fill in the form below and upload your ID, latest payslip and 3 months' bank statements.</li>
+<li>We check them and confirm the amount and repayment date with you on WhatsApp.</li>
+<li>The money is paid into your bank account.</li>
+<li>Repay the full amount on your payday, using the reference we give you.</li>
+</ol></div>
+
+<h2>What it costs</h2>
+<div class="card">
+<div class="row"><span>You borrow</span><span>R1,000</span></div>
+<div class="row"><span>Interest (35%)</span><span>R350</span></div>
+<div class="row"><span>Admin fee</span><span>R40</span></div>
+<div class="row total"><span>You repay on payday</span><span>R1,390</span></div>
+</div>
+<div class="note"><b>If you pay late:</b> 20% is added if payment is more than 3 days late (R1,390 becomes R1,668). If it is still unpaid 14 days after the due date, 35% of the balance is added (R2,251.80), due on your next payday.</div>
+
+<h2 id="apply">Your application</h2>
+<form id="af" class="card" novalidate>
+<h3>About you</h3>
+<label class="f">Full name<input id="name" autocomplete="name" required maxlength="120"></label>
+<label class="f">Cellphone (WhatsApp)<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="082 123 4567"></label>
+<label class="f">Email <small>Optional</small><input id="email" type="email" autocomplete="email" maxlength="200"></label>
+<label class="f">SA ID number<input id="idn" inputmode="numeric" maxlength="13" required></label>
+<div class="err" id="idn_err" hidden></div>
+<h3>Work and pay</h3>
+<label class="f">Employer<input id="employer" autocomplete="organization" required maxlength="120"></label>
+<label class="f">Payday <small>The day your salary is paid, e.g. 25th or last Friday</small><input id="payday" required maxlength="40"></label>
+<label class="f">Monthly take-home pay (R)<input id="net" type="number" inputmode="numeric" min="0" step="1" required></label>
+<h3>Your loan</h3>
+<label class="f">Amount you want to borrow (R)<input id="amount" type="number" inputmode="numeric" min="100" step="50" required></label>
+<div class="small" id="quote" style="color:var(--muted);font-size:.92rem;margin-top:4px"></div>
+<label class="f">Date you will repay <small>Your next payday</small><input id="repay" type="date" required></label>
+<label class="f">How did you hear about us?<select id="source"><option value="">Choose</option><option>Facebook</option><option>WhatsApp</option><option>A friend or family member</option><option>Google</option><option>Flyer or poster</option><option>Other</option></select></label>
+<h3>Documents</h3>
+<p style="margin:0;color:var(--muted);font-size:.95rem">Clear photos or PDFs, up to 10 MB each.</p>
+<label class="f">ID (both sides of a card ID)<input id="f_id" type="file" accept="image/*,application/pdf" multiple required></label>
+<label class="f">Latest payslip<input id="f_payslip" type="file" accept="image/*,application/pdf" multiple required></label>
+<label class="f">Bank statements for the last 3 months<input id="f_bank" type="file" accept="image/*,application/pdf" multiple required></label>
+<input class="hp" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label class="chk"><input type="checkbox" id="consent" required><span>I agree that 365 Financial Services may use these details and documents to assess my application. If it is not approved, my details and documents are deleted.</span></label>
+<div id="msg" role="status" aria-live="polite"></div>
+<button class="btn main" id="go" type="submit">Send my application</button>
+</form>
+
+<h2>Questions</h2>
+<div class="card">
+<details><summary>Who can apply?</summary><p>People with a salary paid into a bank account on a set payday.</p></details>
+<details><summary>Can I have more than one loan?</summary><p>One loan at a time. A new loan is possible once the previous one is paid.</p></details>
+<details><summary>When do I repay?</summary><p>In one payment on the payday we agree with you, after your salary is paid.</p></details>
+<details><summary>What happens to my documents?</summary><p>We use them only to assess your application. If it is not approved, we delete your details and documents and let you know.</p></details>
+</div>
+
+<footer>365 Financial Services · <a href="tel:+27608602558">060 860 2558</a> · <a href="mailto:365fns@gmail.com">365fns@gmail.com</a></footer>
+</main>
+
+<nav class="bar" aria-label="Quick actions">
+<a class="btn main" href="#apply">Apply now</a>
+<a class="btn wa" href="https://wa.me/27608602558" target="_blank" rel="noopener" aria-label="WhatsApp us">WhatsApp</a>
+</nav>
+<script>
+const SUPABASE_URL = 'https://zkbxerbrvyghxhnhtttr.supabase.co', SUPABASE_KEY = 'sb_publishable_QrYuyabE9Hcz-f_8oVWZLA_610EGKi2';
+const $ = id => document.getElementById(id), v = id => $(id).value.trim();
+const MAX = 10 * 1024 * 1024, TYPES = /^(application\/pdf|image\/(jpeg|png|webp))$/;
+function checkID(id) {
+  if (!/^\d{13}$/.test(id)) return 'Your ID number must be 13 digits.';
+  let s = 0; for (let i = 0; i < 13; i++) { let d = +id[i]; if (i % 2) { d *= 2; if (d > 9) d -= 9; } s += d; }
+  if (s % 10) return 'Please check your ID number; it does not look right.';
+  const mm = +id.slice(2, 4), dd = +id.slice(4, 6); if (mm < 1 || mm > 12 || dd < 1 || dd > 31) return 'Please check your ID number; the date of birth part does not look right.';
+  return '';
+}
+const money = x => 'R' + x.toLocaleString('en-ZA', { minimumFractionDigits: x % 1 ? 2 : 0, maximumFractionDigits: 2 }).replace(/ /g, ',');
+$('amount').addEventListener('input', () => { const a = +v('amount'); $('quote').textContent = a > 0 ? `You would repay ${money(Math.round((a * 1.35 + 40) * 100) / 100)} on payday (35% interest + R40 admin fee).` : ''; });
+$('idn').addEventListener('blur', () => { const e = v('idn') ? checkID(v('idn').replace(/\s/g, '')) : ''; $('idn_err').textContent = e; $('idn_err').hidden = !e; });
+const say = (cls, html) => { $('msg').innerHTML = `<div class="note ${cls}">${html}</div>`; };
+const head = extra => ({ apikey: SUPABASE_KEY, ...(SUPABASE_KEY.startsWith('eyJ') ? { Authorization: 'Bearer ' + SUPABASE_KEY } : {}), ...extra });
+const uuid = () => crypto.randomUUID ? crypto.randomUUID() : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+$('af').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (v('website')) return; // filled in only by spam bots
+  const idn = v('idn').replace(/\s/g, ''), groups = [['id', $('f_id').files], ['payslip', $('f_payslip').files], ['bank', $('f_bank').files]];
+  const problems = [];
+  if (v('name').length < 2) problems.push('your full name');
+  if (!/^[0-9 +()-]{9,20}$/.test(v('phone'))) problems.push('a cellphone number');
+  const ide = checkID(idn); if (ide) problems.push('a valid ID number');
+  if (!v('employer')) problems.push('your employer');
+  if (!v('payday')) problems.push('your payday');
+  if (!(+v('net') > 0)) problems.push('your take-home pay');
+  if (!(+v('amount') >= 100)) problems.push('the amount you want to borrow');
+  if (!v('repay') || v('repay') <= new Date().toISOString().slice(0, 10)) problems.push('a repayment date in the future');
+  for (const [k, fs] of groups) if (!fs.length) problems.push({ id: 'your ID', payslip: 'your payslip', bank: 'your bank statements' }[k]);
+  const files = groups.flatMap(([k, fs]) => [...fs].map(f => ({ k, f })));
+  if (files.length > 10) problems.push('no more than 10 files in total');
+  const bad = files.filter(x => x.f.size > MAX || !TYPES.test(x.f.type));
+  if (bad.length) problems.push('photos or PDFs under 10 MB (check ' + bad.map(x => x.f.name).join(', ') + ')');
+  if (!$('consent').checked) problems.push('to tick the agreement box');
+  if (problems.length) { say('bad', 'Please add ' + problems.join(', ') + '.'); return; }
+  const id = uuid(); $('go').disabled = true;
+  try {
+    const paths = []; let n = 0;
+    for (const { k, f } of files) {
+      n++; say('', `Uploading document ${n} of ${files.length}…`);
+      const ext = (f.type.split('/')[1] || 'bin').replace('jpeg', 'jpg'), path = `${id}/${k}-${n}.${ext}`;
+      const r = await fetch(`${SUPABASE_URL}/storage/v1/object/intake/${path}`, { method: 'POST', headers: head({ 'content-type': f.type, 'x-upsert': 'false' }), body: f });
+      if (!r.ok) throw new Error('upload ' + r.status);
+      paths.push({ path, kind: k, name: f.name.slice(0, 120), type: f.type });
+    }
+    say('', 'Sending your application…');
+    const row = { id, name: v('name'), phone: v('phone'), email: v('email') || null, id_number: idn, employer: v('employer'), payday: v('payday'), net_income: +v('net'), amount: +v('amount'), repay_date: v('repay'), source: v('source') || null, files: paths, consent: true };
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/applications`, { method: 'POST', headers: head({ 'content-type': 'application/json', Prefer: 'return=minimal' }), body: JSON.stringify(row) });
+    if (!r.ok) throw new Error('save ' + r.status);
+    const first = row.name.split(' ')[0].replace(/[<&]/g, ''), ph = row.phone.replace(/[<&]/g, '');
+    $('af').innerHTML = `<div class="note good"><b>Thank you, ${first}. Your application is in.</b><br>We will contact you on WhatsApp at ${ph} once we have checked your documents.</div><a class="btn wa" href="https://wa.me/27608602558" target="_blank" rel="noopener">Questions? WhatsApp us</a>`;
+    $('af').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    $('go').disabled = false;
+    say('bad', 'Sorry, your application did not go through. Please check your connection and press Send again, or WhatsApp us on 060 860 2558.');
+  }
+});
+</script>
+</body></html>
